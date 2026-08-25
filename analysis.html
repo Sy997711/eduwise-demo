@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学情分析 | EduWise · 智教助手</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=2">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🎓</div>
+        <span>EduWise 智教助手</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="lesson-prep.html">智能备课</a></li>
+        <li><a href="lesson-plan.html">教案生成</a></li>
+        <li><a href="knowledge.html">知识图谱</a></li>
+        <li><a href="analysis.html" class="active">学情分析</a></li>
+      </ul>
+      <div class="nav-user">
+        <span>李老师</span>
+        <div class="avatar">李</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size: 26px; margin-bottom: 6px;">📊 学情智能分析</h1>
+      <p style="color: var(--text-light); font-size: 14px;">AI 多维度画像：班级整体 + 学生个体，精准定位薄弱点，为备课与辅导提供数据支撑</p>
+    </div>
+
+    <!-- 筛选器 -->
+    <div class="card" style="margin-bottom: 24px;">
+      <div class="form-row" style="gap: 16px;">
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label">📘 学科</label>
+          <select class="form-select" id="subj">
+            <option>高等数学</option>
+            <option selected>大学英语</option>
+            <option>程序设计</option>
+            <option>线性代数</option>
+            <option>概率论</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label">🎒 班级</label>
+          <select class="form-select">
+            <option selected>大一 · 计算机类 3 班</option>
+            <option>大一 · 计算机类 1 班</option>
+            <option>大一 · 计算机类 2 班</option>
+            <option>大二 · 软件工程 1 班</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label">📆 分析周期</label>
+          <select class="form-select">
+            <option>最近一周</option>
+            <option selected>最近一月</option>
+            <option>本学期至今</option>
+            <option>自定义区间</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label">📝 数据来源</label>
+          <select class="form-select">
+            <option selected>作业 + 测验 + 课堂</option>
+            <option>仅作业数据</option>
+            <option>仅考试数据</option>
+            <option>全部数据</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- 顶部指标卡 -->
+    <div class="stats-grid" style="margin-bottom: 24px;">
+      <div class="card stat-card">
+        <div class="stat-icon icon-blue">👥</div>
+        <div><div class="stat-value">48 人</div><div class="stat-label">班级总人数</div></div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon icon-green">📈</div>
+        <div>
+          <div class="stat-value">82.6 <span style="font-size:14px;color:var(--text-light);">分</span></div>
+          <div class="stat-label">班级平均分 <span style="color:var(--secondary);">↑ 3.4</span></div>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon icon-orange">🎯</div>
+        <div>
+          <div class="stat-value">87.5%</div>
+          <div class="stat-label">知识点平均掌握率</div>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon icon-purple">⚠️</div>
+        <div>
+          <div class="stat-value" style="color:#ef4444;">6 项</div>
+          <div class="stat-label">预警薄弱知识点</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI 智能结论 -->
+    <div class="card" style="margin-bottom: 24px; border-left: 5px solid var(--primary);">
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <div style="font-size: 32px; flex-shrink: 0;">🤖</div>
+        <div style="flex: 1;">
+          <h3 style="font-size: 16px; margin-bottom: 10px;">AI 学情诊断报告 · 摘要</h3>
+          <p style="font-size: 14px; color: #475569; margin-bottom: 10px;">
+            整体来看，<strong>大一计算机类3班 · 高等数学</strong>在本阶段的学习呈<strong style="color:var(--secondary);">稳步上升</strong>态势（均分↑3.4）。
+            学生对「二次函数定义与图像」掌握良好（>90%），但<strong style="color:#ef4444;">「实际应用建模」「与几何综合」</strong>两模块需要重点突破。
+            以下学生需重点关注：<span class="badge badge-red">张XX、王XX、陈XX</span>（连续两次作业错误率偏高）。
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <button class="btn-primary-solid" style="padding: 8px 18px; font-size: 13px;">🔁 据此生成个性化教案</button>
+            <button class="btn-secondary" style="padding: 8px 18px; font-size: 13px;">📌 推送针对性练习组</button>
+            <button class="btn-secondary" style="padding: 8px 18px; font-size: 13px;">⬇ 下载完整分析报告</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 图表 1 + 图表 2 -->
+    <div class="analysis-grid">
+      <!-- 柱状图：知识点掌握率 -->
+      <div class="card chart-card">
+        <h4>📉 各知识点掌握度</h4>
+        <div class="bar-chart">
+          <div class="bar-item">
+            <div class="bar" style="height: 92%;"><div class="bar-value">92%</div></div>
+            <div class="bar-label">定义概念</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar" style="height: 85%;"><div class="bar-value">85%</div></div>
+            <div class="bar-label">图像性质</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar" style="height: 78%;"><div class="bar-value">78%</div></div>
+            <div class="bar-label">三种表达式</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar" style="height: 68%;"><div class="bar-value">68%</div></div>
+            <div class="bar-label">图像变换</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar" style="height: 56%; background: linear-gradient(180deg, #fbbf24, #f59e0b);"><div class="bar-value" style="color:#b45309;">56%</div></div>
+            <div class="bar-label">实际建模</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar" style="height: 43%; background: linear-gradient(180deg, #fca5a5, #ef4444);"><div class="bar-value" style="color:#991b1b;">43%</div></div>
+            <div class="bar-label">几何综合</div>
+          </div>
+        </div>
+        <div style="margin-top: 14px; font-size: 12px; color: var(--text-light);">
+          💡 建议：优先复习「几何综合」与「实际建模」，可从知识图谱中引用专题资源
+        </div>
+      </div>
+
+      <!-- 饼图：成绩分布 -->
+      <div class="card chart-card">
+        <h4>🎂 成绩分层分布</h4>
+        <div class="pie-wrap">
+          <div class="pie"></div>
+          <ul class="legend">
+            <li><span class="legend-color" style="background:#10b981;"></span>优秀（90-100分）<strong style="margin-left:auto;">45%（21人）</strong></li>
+            <li><span class="legend-color" style="background:#4f46e5;"></span>良好（75-89分）<strong style="margin-left:auto;">30%（14人）</strong></li>
+            <li><span class="legend-color" style="background:#f59e0b;"></span>中等（60-74分）<strong style="margin-left:auto;">17%（8人）</strong></li>
+            <li><span class="legend-color" style="background:#ef4444;"></span>待提升（<60分）<strong style="margin-left:auto;">8%（5人）</strong></li>
+          </ul>
+        </div>
+        <div style="margin-top: 14px; font-size: 12px; color: var(--text-light);">
+          💡 较上月：优秀率 +6%，待提升 -3%，整体向好
+        </div>
+      </div>
+
+      <!-- 能力雷达替代：进度条维度 -->
+      <div class="card chart-card">
+        <h4>🧭 班级五大能力维度</h4>
+        <ul class="progress-list">
+          <li class="progress-item">
+            <div class="progress-header"><span>📐 计算能力</span><strong>88%</strong></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 88%;"></div></div>
+          </li>
+          <li class="progress-item">
+            <div class="progress-header"><span>🧠 逻辑推理</span><strong>82%</strong></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 82%;"></div></div>
+          </li>
+          <li class="progress-item">
+            <div class="progress-header"><span>📊 数据分析</span><strong>76%</strong></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 76%;"></div></div>
+          </li>
+          <li class="progress-item">
+            <div class="progress-header"><span>🧩 算法设计</span><strong style="color:#b45309;">59%</strong></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 59%; background: linear-gradient(90deg, #fbbf24, #f59e0b);"></div></div>
+          </li>
+          <li class="progress-item">
+            <div class="progress-header"><span>🔍 问题解决</span><strong style="color:#991b1b;">48%</strong></div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 48%; background: linear-gradient(90deg, #fca5a5, #ef4444);"></div></div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 近6次测验趋势（简易折线替代：柱状时间轴） -->
+      <div class="card chart-card">
+        <h4>📈 班级均分趋势（近 6 次测验）</h4>
+        <div class="bar-chart" style="height: 180px;">
+          <div class="bar-item">
+            <div class="bar" style="height: calc(74.2 / 100 * 180px);"><div class="bar-value">74.2</div></div>
+            <div class="bar-label">8/1 测验1</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar" style="height: calc(76.5 / 100 * 180px);"><div class="bar-value">76.5</div></div>
+            <div class="bar-label">8/5 测验2</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar" style="height: calc(75.8 / 100 * 180px);"><div class="bar-value">75.8</div></div>
+            <div class="bar-label">8/9 测验3</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar" style="height: calc(79.2 / 100 * 180px);"><div class="bar-value">79.2</div></div>
+            <div class="bar-label">8/13 测验4</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar" style="height: calc(80.1 / 100 * 180px);"><div class="bar-value">80.1</div></div>
+            <div class="bar-label">8/19 测验5</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar" style="height: calc(82.6 / 100 * 180px);"><div class="bar-value">82.6</div></div>
+            <div class="bar-label">8/23 测验6</div>
+          </div>
+        </div>
+        <div style="margin-top: 14px; font-size: 12px; color: var(--secondary); font-weight: 500;">
+          📈 稳定上升趋势，累计提升 +8.4 分
+        </div>
+      </div>
+    </div>
+
+    <!-- 学生个体学情表 -->
+    <div class="card" style="margin-bottom: 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="font-size: 17px;">👨‍🎓 学生个体学情明细</h3>
+        <div style="display: flex; gap: 8px;">
+          <input class="form-input" placeholder="搜索学生姓名..." style="width: 200px; padding: 6px 12px; font-size: 13px;" oninput="filterStudents(this.value)">
+          <select class="form-select" style="width: 140px; padding: 6px 12px; font-size: 13px;">
+            <option>综合排序</option>
+            <option>按总分升序</option>
+            <option>按总分降序</option>
+            <option>按进步幅度</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="data-table" id="std-table">
+          <thead>
+            <tr>
+              <th>学号</th>
+              <th>姓名</th>
+              <th>定义概念</th>
+              <th>图像性质</th>
+              <th>三种表达式</th>
+              <th>图像变换</th>
+              <th>实际建模</th>
+              <th>几何综合</th>
+              <th>综合得分</th>
+              <th>等级</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>20240301</td><td><strong>李想</strong></td><td>95</td><td>92</td><td>90</td><td>88</td><td>82</td><td>75</td><td><strong>87.0</strong></td><td><span class="badge badge-green">优秀</span></td><td>稳定</td></tr>
+            <tr><td>20240302</td><td><strong>王子涵</strong></td><td>92</td><td>90</td><td>88</td><td>85</td><td>78</td><td>70</td><td><strong>83.8</strong></td><td><span class="badge badge-blue">良好</span></td><td><span style="color:var(--secondary)">↑进步</span></td></tr>
+            <tr><td>20240303</td><td><strong>张晓明</strong></td><td>72</td><td>65</td><td>60</td><td>48</td><td>35</td><td>22</td><td style="color:#991b1b;"><strong>50.3</strong></td><td><span class="badge badge-red">待提升</span></td><td><span style="color:#ef4444;">⚠预警</span></td></tr>
+            <tr><td>20240304</td><td><strong>陈思雨</strong></td><td>68</td><td>62</td><td>58</td><td>52</td><td>38</td><td>25</td><td style="color:#991b1b;"><strong>50.5</strong></td><td><span class="badge badge-red">待提升</span></td><td><span style="color:#ef4444;">⚠预警</span></td></tr>
+            <tr><td>20240305</td><td><strong>刘佳怡</strong></td><td>90</td><td>95</td><td>92</td><td>86</td><td>80</td><td>78</td><td><strong>86.8</strong></td><td><span class="badge badge-green">优秀</span></td><td><span style="color:var(--secondary)">↑进步</span></td></tr>
+            <tr><td>20240306</td><td><strong>王浩宇</strong></td><td>85</td><td>82</td><td>80</td><td>75</td><td>68</td><td>60</td><td><strong>75.0</strong></td><td><span class="badge badge-blue">良好</span></td><td>稳定</td></tr>
+            <tr><td>20240307</td><td><strong>赵敏</strong></td><td>80</td><td>78</td><td>75</td><td>72</td><td>65</td><td>58</td><td><strong>71.3</strong></td><td><span class="badge badge-yellow">中等</span></td><td>稳定</td></tr>
+            <tr><td>20240308</td><td><strong>孙博文</strong></td><td>96</td><td>98</td><td>95</td><td>92</td><td>88</td><td>85</td><td><strong>92.3</strong></td><td><span class="badge badge-green">优秀</span></td><td><span style="color:var(--secondary)">↑大幅进步</span></td></tr>
+            <tr><td>20240309</td><td><strong>周子萱</strong></td><td>88</td><td>85</td><td>83</td><td>78</td><td>72</td><td>65</td><td><strong>78.5</strong></td><td><span class="badge badge-blue">良好</span></td><td>稳定</td></tr>
+            <tr><td>20240310</td><td><strong>吴佳俊</strong></td><td>70</td><td>68</td><td>65</td><td>58</td><td>42</td><td>35</td><td style="color:#92400e;"><strong>56.3</strong></td><td><span class="badge badge-yellow">中等</span></td><td><span style="color:#ef4444;">⚠预警</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- AI 建议 -->
+    <div class="two-col" style="grid-template-columns: 1fr 1fr;">
+      <div class="card">
+        <h3 style="font-size: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">💡 <span>分层教学建议</span></h3>
+        <div class="content-block" style="background:#ecfdf5; border-left-color:#10b981;">
+          <h4 style="color:#065f46;">✅ 优生层（前 45%）</h4>
+          <ul style="font-size: 13px;">
+            <li>提供「二次函数与几何综合」拓展练习，引入中考压轴题真题</li>
+            <li>布置开放性探究作业：生活场景建模小论文</li>
+            <li>鼓励担任小老师，参与互助辅导</li>
+          </ul>
+        </div>
+        <div class="content-block" style="background:#eef2ff; border-left-color:#4f46e5;">
+          <h4 style="color:var(--primary-dark);">✅ 中等层（30%+17%）</h4>
+          <ul style="font-size: 13px;">
+            <li>重点突破「图像变换」与「实际建模」两模块</li>
+            <li>采用「变式训练」强化基础题型的灵活度</li>
+            <li>建立错题本，每周复盘 5-8 道高频错题</li>
+          </ul>
+        </div>
+        <div class="content-block" style="background:#fffbeb; border-left-color:#f59e0b;">
+          <h4 style="color:#92400e;">✅ 待提升层（后 8%）</h4>
+          <ul style="font-size: 13px;">
+            <li>一对一诊断：从「三种表达式」基础概念回炉</li>
+            <li>降低练习难度，优先保证正确率>80%</li>
+            <li>设计每日 3-5 题小练习，建立信心</li>
+            <li>建议 <strong style="color:#991b1b;">张晓明、陈思雨</strong> 本周课后辅导 2 次</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">📚 <span>下阶段教学内容推荐</span></h3>
+
+        <div class="content-block">
+          <h4>🔁 复习强化优先级</h4>
+          <ul class="progress-list">
+            <li class="progress-item">
+              <div class="progress-header"><span>① 二次函数 · 几何综合压轴题</span><span style="color:#ef4444;">紧急</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width: 43%; background: linear-gradient(90deg,#fca5a5,#ef4444);"></div></div>
+            </li>
+            <li class="progress-item">
+              <div class="progress-header"><span>② 实际应用与建模（利润/面积）</span><span style="color:#b45309;">重要</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width: 56%; background: linear-gradient(90deg,#fbbf24,#f59e0b);"></div></div>
+            </li>
+            <li class="progress-item">
+              <div class="progress-header"><span>③ 图像平移与对称变换</span><span style="color:#64748b;">常规</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width: 68%;"></div></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="content-block">
+          <h4>📌 推荐配套资源</h4>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="knowledge.html" style="display:flex; justify-content: space-between; align-items:center; padding: 10px 12px; background:#f8fafc; border-radius:8px; font-size: 13px;">
+              <span>🧩 二次函数应用题（利润最值）专题</span>
+              <span style="color:var(--primary);">使用 →</span>
+            </a>
+            <a href="lesson-plan.html" style="display:flex; justify-content: space-between; align-items:center; padding: 10px 12px; background:#f8fafc; border-radius:8px; font-size: 13px;">
+              <span>📑 自动生成「二次函数复习课」教案</span>
+              <span style="color:var(--primary);">生成 →</span>
+            </a>
+            <a href="knowledge.html" style="display:flex; justify-content: space-between; align-items:center; padding: 10px 12px; background:#f8fafc; border-radius:8px; font-size: 13px;">
+              <span>🧠 函数与几何综合压轴题解题策略</span>
+              <span style="color:var(--primary);">使用 →</span>
+            </a>
+          </div>
+        </div>
+
+        <button class="btn-primary-solid" style="width: 100%;" onclick="showToast('已基于学情自动生成下一周的个性化教学方案')">
+          ✨ AI 一键生成下阶段教学方案
+        </button>
+      </div>
+    </div>
+
+    <div class="footer">
+      EduWise · 智教助手 &nbsp;|&nbsp; 数据来源：作业系统 + 智能阅卷 + 课堂互动反馈
+    </div>
+  </div>
+
+  <script src="assets/js/common.js?v=2"></script>
+  <script>
+    function filterStudents(kw) {
+      kw = kw.trim();
+      document.querySelectorAll('#std-table tbody tr').forEach(tr => {
+        tr.style.display = (!kw || tr.innerText.includes(kw)) ? '' : 'none';
+      });
+    }
+    // 简单动画：进度条在进入视图时填值
+    setTimeout(() => {
+      document.querySelectorAll('.progress-fill').forEach(el => {
+        const w = el.style.width;
+        el.style.width = '0';
+        setTimeout(() => el.style.width = w, 100);
+      });
+    }, 200);
+  </script>
+</body>
+</html>

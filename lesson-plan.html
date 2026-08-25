@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>教案生成 | EduWise · 智教助手</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=2">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🎓</div>
+        <span>EduWise 智教助手</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="lesson-prep.html">智能备课</a></li>
+        <li><a href="lesson-plan.html" class="active">教案生成</a></li>
+        <li><a href="knowledge.html">知识图谱</a></li>
+        <li><a href="analysis.html">学情分析</a></li>
+      </ul>
+      <div class="nav-user">
+        <span>李老师</span>
+        <div class="avatar">李</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size: 26px; margin-bottom: 6px;">📑 AI 教案生成</h1>
+      <p style="color: var(--text-light); font-size: 14px;">智能生成符合学校规范的结构化教案表格，支持多种课型，一键导出直接使用</p>
+    </div>
+
+    <div class="steps">
+      <div class="step done"><div class="step-num">✓</div><div class="step-text">选择课型</div></div>
+      <div class="step-line"></div>
+      <div class="step active"><div class="step-num">2</div><div class="step-text">配置参数</div></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">生成教案</div></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text">导出使用</div></div>
+    </div>
+
+    <div class="two-col">
+      <!-- 配置表单 -->
+      <div class="card" style="height: fit-content;">
+        <h3 style="font-size: 17px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">📋 教案配置</h3>
+
+        <!-- 课型选择 -->
+        <div class="form-group">
+          <label class="form-label">🗂 课型选择</label>
+          <div class="tag-group" data-multi="false" id="type-tags">
+            <div class="tag active">新授课</div>
+            <div class="tag">复习课</div>
+            <div class="tag">习题课</div>
+            <div class="tag">实验课</div>
+          </div>
+        </div>
+
+        <!-- 学科 + 年级 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">📘 学科</label>
+            <select class="form-select" id="subject">
+              <option>高等数学</option>
+              <option>程序设计</option>
+              <option selected>大学英语</option>
+              <option>线性代数</option>
+              <option>概率论</option>
+              <option>数据结构</option>
+              <option>计算机网络</option>
+              <option>思想政治</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">🎒 年级</label>
+            <select class="form-select" id="grade">
+              <option selected>大一</option>
+              <option>大二</option>
+              <option>大三</option>
+              <option>大四</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 课题 -->
+        <div class="form-group">
+          <label class="form-label">📖 教案课题</label>
+          <input class="form-input" id="topic" type="text" value="二次函数的图像与性质">
+        </div>
+
+        <!-- 课时 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">⏱ 课时时长</label>
+            <select class="form-select" id="duration">
+              <option value="40">40 分钟</option>
+              <option value="45" selected>45 分钟</option>
+              <option value="50">50 分钟</option>
+              <option value="60">60 分钟（连堂）</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">📚 教材版本</label>
+            <select class="form-select" id="book">
+              <option>人教版</option>
+              <option>北师大版</option>
+              <option selected>沪科版</option>
+              <option>苏教版</option>
+              <option>其他</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 课程标准 -->
+        <div class="form-group">
+          <label class="form-label">📏 对应课程标准（可选）</label>
+          <input class="form-input" id="standards" type="text" placeholder="例如：了解二次函数概念，掌握图像的平移与开口规律" value="理解二次函数图像性质，会用顶点式分析对称轴与最值">
+        </div>
+
+        <!-- 教学目标 -->
+        <div class="form-group">
+          <label class="form-label">🎯 三维教学目标（可选，留空自动生成）</label>
+          <textarea class="form-textarea" id="objectives" rows="4" placeholder="每行一条，可分别写知识与技能、过程与方法、情感态度目标"></textarea>
+        </div>
+
+        <!-- 风格 -->
+        <div class="form-group">
+          <label class="form-label">🎨 教学风格偏好</label>
+          <div class="tag-group" data-multi="true" id="style-tags">
+            <div class="tag active">启发式</div>
+            <div class="tag">合作探究</div>
+            <div class="tag active">情境创设</div>
+            <div class="tag">分层教学</div>
+            <div class="tag">翻转课堂</div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <button class="btn-primary-solid" style="flex:1;" onclick="doGeneratePlan()">✨ 生成标准教案</button>
+          <button class="btn-secondary" onclick="resetPlan()">重置</button>
+        </div>
+      </div>
+
+      <!-- 输出区 -->
+      <div class="output-panel">
+        <div class="output-header">
+          <h4>📄 教案预览</h4>
+          <div class="output-actions">
+            <button class="icon-btn" title="复制" onclick="copyResult('#output')">📋</button>
+            <button class="icon-btn" title="下载 Markdown" onclick="downloadResult('#output', '教案-' + (document.getElementById('topic').value||'output'))">⬇</button>
+            <button class="icon-btn" title="打印 / 转 PDF" onclick="window.print()">🖨</button>
+            <button class="icon-btn" title="重新生成" onclick="doGeneratePlan()">🔄</button>
+          </div>
+        </div>
+        <div class="output-body" id="output">
+          <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div style="font-size: 14px; color: var(--text-light);">正在调取课程标准、生成结构化教案...</div>
+          </div>
+          <div class="empty-state" id="empty-state">
+            <div class="empty-icon">📑</div>
+            <div style="font-size: 15px; font-weight: 500; color: var(--text);">教案将显示在此处</div>
+            <div style="font-size: 13px;">包含教案概览、教学目标、重难点、活动设计、板书、作业与反思等完整结构</div>
+          </div>
+          <div class="output-body-inner"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 历史教案 -->
+    <section style="margin-top: 40px;">
+      <h2 class="section-title"><span class="dot"></span>最近生成的教案</h2>
+      <div class="knowledge-cards" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+        <div class="k-card">
+          <div class="k-card-header">
+            <span class="k-card-tag tag-math">高等数学</span>
+            <span style="font-size:12px; color:var(--text-light);">新授课 · 45分钟</span>
+          </div>
+          <h4>勾股定理及其应用</h4>
+          <p>通过拼图活动理解勾股定理证明，会运用定理解直角三角形实际问题。</p>
+          <div class="k-card-footer"><span>📅 昨天 15:42</span><span style="color:var(--primary);">查看教案 →</span></div>
+        </div>
+        <div class="k-card">
+          <div class="k-card-header">
+            <span class="k-card-tag tag-chinese">程序设计</span>
+            <span style="font-size:12px; color:var(--text-light);">新授课 · 2课时</span>
+          </div>
+          <h4>《背影》- 朱自清</h4>
+          <p>品味朴实语言中蕴含的父子深情，学习细节描写刻画人物的方法。</p>
+          <div class="k-card-footer"><span>📅 2026-08-22</span><span style="color:var(--primary);">查看教案 →</span></div>
+        </div>
+        <div class="k-card">
+          <div class="k-card-header">
+            <span class="k-card-tag tag-physics">线性代数</span>
+            <span style="font-size:12px; color:var(--text-light);">实验课 · 50分钟</span>
+          </div>
+          <h4>探究：影响滑动摩擦力的因素</h4>
+          <p>通过控制变量法实验探究压力与粗糙程度对滑动摩擦力的影响规律。</p>
+          <div class="k-card-footer"><span>📅 2026-08-20</span><span style="color:var(--primary);">查看教案 →</span></div>
+        </div>
+        <div class="k-card">
+          <div class="k-card-header">
+            <span class="k-card-tag tag-english">大学英语</span>
+            <span style="font-size:12px; color:var(--text-light);">复习课 · 40分钟</span>
+          </div>
+          <h4>现在完成时专项复习</h4>
+          <p>系统梳理现在完成时构成、用法及与一般过去时的区别，配套专项练习。</p>
+          <div class="k-card-footer"><span>📅 2026-08-18</span><span style="color:var(--primary);">查看教案 →</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      EduWise · 智教助手 &nbsp;|&nbsp; 教案符合义务教育/高中课程标准规范
+    </div>
+  </div>
+
+  <script src="assets/js/common.js?v=2"></script>
+  <script>
+    function doGeneratePlan() {
+      const subject = document.getElementById('subject').value;
+      const grade = document.getElementById('grade').value;
+      const topic = document.getElementById('topic').value.trim();
+      const duration = parseInt(document.getElementById('duration').value) || 45;
+      const type = document.querySelector('#type-tags .tag.active')?.textContent || '新授课';
+      const standards = document.getElementById('standards').value.trim();
+      const objRaw = document.getElementById('objectives').value.trim();
+
+      if (!topic) {
+        showToast('请填写教案课题');
+        document.getElementById('topic').focus();
+        return;
+      }
+
+      let objectives = [];
+      if (objRaw) {
+        objectives = objRaw.split(/\r?\n/).map(l => l.replace(/^[\s\d\.\-、）\)]+/, '').trim()).filter(Boolean);
+      }
+
+      showLoading('#output');
+      setTimeout(() => {
+        const html = generateLessonPlan({ subject, grade, topic, duration, type, objectives, standards });
+        renderResult('#output', html);
+        // 更新步骤
+        document.querySelectorAll('.step').forEach((s, i) => {
+          s.classList.remove('active', 'done');
+          if (i <= 5) s.classList.add(i === 5 ? 'active' : 'done');
+        });
+      }, 1800);
+    }
+
+    function resetPlan() {
+      document.getElementById('topic').value = '二次函数的图像与性质';
+      document.getElementById('objectives').value = '';
+      document.getElementById('standards').value = '理解二次函数图像性质，会用顶点式分析对称轴与最值';
+      document.querySelector('#output .output-body-inner').innerHTML = '';
+      document.getElementById('empty-state').style.display = 'flex';
+    }
+  </script>
+</body>
+</html>

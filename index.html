@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduWise · 智教助手 | 智能备课与教案生成AI</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=2">
+</head>
+<body>
+  <!-- 登录遮罩层 -->
+  <div id="loginOverlay" class="login-overlay">
+    <div class="login-box">
+      <div class="login-logo">🎓</div>
+      <h2>EduWise 智教助手</h2>
+      <p class="login-subtitle">教师教学智能体创新设计大赛 Demo</p>
+      <form id="loginForm" onsubmit="return doLogin(event)">
+        <div class="login-field">
+          <label>账号</label>
+          <input type="text" id="loginUser" placeholder="请输入账号" required autocomplete="username">
+        </div>
+        <div class="login-field">
+          <label>密码</label>
+          <input type="password" id="loginPwd" placeholder="请输入密码" required autocomplete="current-password">
+        </div>
+        <div id="loginError" class="login-error"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%; margin-top:8px;">登 录</button>
+        <p class="login-tip">请使用分配的账号登录系统</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🎓</div>
+        <span>EduWise 智教助手</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="active">首页</a></li>
+        <li><a href="lesson-prep.html">智能备课</a></li>
+        <li><a href="lesson-plan.html">教案生成</a></li>
+        <li><a href="knowledge.html">知识图谱</a></li>
+        <li><a href="analysis.html">学情分析</a></li>
+      </ul>
+      <div class="nav-user" id="navUser">
+        <span id="userName">李老师</span>
+        <div class="avatar" id="userAvatar">李</div>
+        <a href="#" onclick="logout()" style="margin-left:8px;font-size:12px;color:var(--text-light);">退出</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Hero 区域 -->
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-badge">✨ 国家教师减负 · 教育数字化转型 推荐方案</span>
+        <h1>AI 赋能教学创新<br>让每一位教师专注于「教」本身</h1>
+        <p>EduWise 智教助手聚焦教师最核心的备课与教案设计环节，融合大语言模型与教育知识图谱，一键生成高质量备课方案、结构化教案与教学资源，平均节省教师 70% 案头工作时间。</p>
+        <div class="hero-actions">
+          <a href="lesson-prep.html" class="btn btn-primary">🚀 立即开始备课</a>
+          <a href="lesson-plan.html" class="btn btn-outline">📄 生成教案</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 统计数据 -->
+    <section>
+      <div class="stats-grid">
+        <div class="card stat-card">
+          <div class="stat-icon icon-blue">📚</div>
+          <div>
+            <div class="stat-value">2,356</div>
+            <div class="stat-label">累计生成备课方案</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-icon icon-green">📋</div>
+          <div>
+            <div class="stat-value">1,892</div>
+            <div class="stat-label">累计生成教案</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-icon icon-orange">⏱</div>
+          <div>
+            <div class="stat-value">73%</div>
+            <div class="stat-label">平均节省备课时间</div>
+          </div>
+        </div>
+        <div class="card stat-card">
+          <div class="stat-icon icon-purple">👨‍🏫</div>
+          <div>
+            <div class="stat-value">586</div>
+            <div class="stat-label">活跃教师用户</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 核心功能 -->
+    <section>
+      <h2 class="section-title"><span class="dot"></span>核心功能</h2>
+      <div class="features-grid">
+        <div class="card feature-card" onclick="location.href='lesson-prep.html'">
+          <div class="feature-icon icon-blue">📝</div>
+          <h3>智能备课</h3>
+          <p>根据学科、年级、课题一键生成完整备课方案，包含教学目标、重难点、教学过程、板书设计与反思建议。</p>
+          <div class="feature-link">立即使用 →</div>
+        </div>
+        <div class="card feature-card" onclick="location.href='lesson-plan.html'">
+          <div class="feature-icon icon-green">📑</div>
+          <h3>教案生成</h3>
+          <p>输出符合学校规范的结构化教案表格，支持新授课、复习课、习题课、实验课等多种课型模板。</p>
+          <div class="feature-link">立即使用 →</div>
+        </div>
+        <div class="card feature-card" onclick="location.href='knowledge.html'">
+          <div class="feature-icon icon-purple">🗺</div>
+          <h3>知识图谱</h3>
+          <p>按学科与知识点构建结构化知识库，支持快速检索教学素材、经典例题与教学策略参考。</p>
+          <div class="feature-link">浏览知识库 →</div>
+        </div>
+        <div class="card feature-card" onclick="location.href='analysis.html'">
+          <div class="feature-icon icon-orange">📊</div>
+          <h3>学情分析</h3>
+          <p>多维度可视化呈现班级学习情况，精准定位薄弱知识点与学生个体差异，辅助教学决策。</p>
+          <div class="feature-link">查看分析 →</div>
+        </div>
+        <div class="card feature-card" style="opacity:.75; cursor:not-allowed;">
+          <div class="feature-icon icon-pink">🎨</div>
+          <h3>课件制作 <span style="font-size:11px;color:#ef4444;">即将上线</span></h3>
+          <p>根据教案自动生成 PPT 课件骨架，配套插图与动画建议，快速制作精美课件。</p>
+          <div class="feature-link">敬请期待 →</div>
+        </div>
+        <div class="card feature-card" style="opacity:.75; cursor:not-allowed;">
+          <div class="feature-icon icon-cyan">✏️</div>
+          <h3>作业批改 <span style="font-size:11px;color:#ef4444;">即将上线</span></h3>
+          <p>支持图片上传智能识别作业内容，自动批改客观题并给出主观题评分参考与详细批注。</p>
+          <div class="feature-link">敬请期待 →</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 智能体架构说明 -->
+    <section style="margin-bottom: 40px;">
+      <h2 class="section-title"><span class="dot"></span>智能体设计理念</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3 style="margin-bottom: 16px; font-size: 18px;">🧠 多智能体协同架构</h3>
+          <div class="content-block" style="background:#eef2ff; border-left-color:#4f46e5;">
+            <h4 style="font-size:14px; color: var(--primary-dark); margin-bottom: 8px;">① 意图理解智能体</h4>
+            <p style="font-size: 13px; color: #475569;">分析教师教学需求，识别学科、年级、课题、课型等关键参数，自动匹配最优生成模板。</p>
+          </div>
+          <div class="content-block" style="background:#ecfdf5; border-left-color:#10b981;">
+            <h4 style="font-size:14px; color: #065f46; margin-bottom: 8px;">② 知识检索智能体</h4>
+            <p style="font-size: 13px; color: #475569;">基于 RAG 技术从课程标准、教材大纲、校本题库等私有知识库中检索匹配教学资料。</p>
+          </div>
+          <div class="content-block" style="background:#fffbeb; border-left-color:#f59e0b;">
+            <h4 style="font-size:14px; color: #92400e; margin-bottom: 8px;">③ 教学设计智能体</h4>
+            <p style="font-size: 13px; color: #475569;">融合教育学理论（建构主义、最近发展区）设计符合认知规律的教学流程与分层作业。</p>
+          </div>
+          <div class="content-block" style="background:#fdf2f8; border-left-color:#ec4899;">
+            <h4 style="font-size:14px; color: #9d174d; margin-bottom: 8px;">④ 审核优化智能体</h4>
+            <p style="font-size: 13px; color: #475569;">检查教案是否符合课程标准，排查科学性与合理性，给出进一步优化建议。</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin-bottom: 16px; font-size: 18px;">🌟 产品价值</h3>
+          <table class="data-table">
+            <thead>
+              <tr><th>对比维度</th><th>传统备课</th><th>EduWise 智能体</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>单课备课耗时</td><td>120~180 分钟</td><td><span class="badge badge-green">5~15 分钟</span></td></tr>
+              <tr><td>资源查找</td><td>多平台手动搜索</td><td><span class="badge badge-green">AI 智能匹配</span></td></tr>
+              <tr><td>教案规范度</td><td>取决于教师经验</td><td><span class="badge badge-blue">结构化标准模板</span></td></tr>
+              <tr><td>课程标准匹配</td><td>人工对照查阅</td><td><span class="badge badge-green">自动对齐课标</span></td></tr>
+              <tr><td>学情适配</td><td>凭经验判断</td><td><span class="badge badge-blue">数据驱动适配</span></td></tr>
+              <tr><td>修改与复用</td><td>文档手动编辑</td><td><span class="badge badge-green">一键再生成</span></td></tr>
+              <tr><td>教师投入</td><td>大量重复性劳动</td><td><span class="badge badge-green">专注教学创新</span></td></tr>
+            </tbody>
+          </table>
+
+          <div class="ai-tip" style="margin-top: 20px;">
+            <div class="ai-tip-icon">💡</div>
+            <div>
+              <strong>政策契合：</strong>紧扣国家"教师减负二十条"与"教育数字化战略行动"要求，通过人工智能赋能教师，将教师从机械、重复的案头工作中解放出来，让教师回归育人本质，聚焦教学设计创新与学生个性化发展。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 应用场景 -->
+    <section style="margin-bottom: 40px;">
+      <h2 class="section-title"><span class="dot"></span>典型应用场景</h2>
+      <div class="features-grid">
+        <div class="card" style="padding: 24px;">
+          <div style="font-size: 30px; margin-bottom: 10px;">🌅</div>
+          <h4 style="font-size: 16px; margin-bottom: 8px;">日常高效备课</h4>
+          <p style="font-size: 14px; color: var(--text-light);">每日常规教学前，快速生成高质量备课方案与配套教案，减少熬夜写教案负担。</p>
+        </div>
+        <div class="card" style="padding: 24px;">
+          <div style="font-size: 30px; margin-bottom: 10px;">🏆</div>
+          <h4 style="font-size: 16px; margin-bottom: 8px;">教学竞赛/公开课</h4>
+          <p style="font-size: 14px; color: var(--text-light);">参赛或公开课前，快速迭代多版教学设计，融合多种教学法，打造精品课堂。</p>
+        </div>
+        <div class="card" style="padding: 24px;">
+          <div style="font-size: 30px; margin-bottom: 10px;">🎓</div>
+          <h4 style="font-size: 16px; margin-bottom: 8px;">新教师快速入门</h4>
+          <p style="font-size: 14px; color: var(--text-light);">帮助新入职教师快速掌握规范的教案撰写方法，参考成熟教学设计，缩短成长周期。</p>
+        </div>
+        <div class="card" style="padding: 24px;">
+          <div style="font-size: 30px; margin-bottom: 10px;">🔀</div>
+          <h4 style="font-size: 16px; margin-bottom: 8px;">跨学科/跨年级教学</h4>
+          <p style="font-size: 14px; color: var(--text-light);">承担多学科或多年级教学时，快速适配不同学段学情，保证每节课都有高质量设计。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 页脚 -->
+    <div class="footer">
+      <div style="margin-bottom: 8px;">
+        <strong style="color: var(--text);">EduWise · 智教助手</strong> — AI 时代教师的智能教学伙伴
+      </div>
+      <div>助力"教师减负"与"教育数字化转型" · 让教学更高效、更专业、更有温度</div>
+    </div>
+  </div>
+
+  <script src="assets/js/common.js?v=2"></script>
+</body>
+</html>

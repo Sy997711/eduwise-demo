@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>知识图谱 | EduWise · 智教助手</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=2">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🎓</div>
+        <span>EduWise 智教助手</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="lesson-prep.html">智能备课</a></li>
+        <li><a href="lesson-plan.html">教案生成</a></li>
+        <li><a href="knowledge.html" class="active">知识图谱</a></li>
+        <li><a href="analysis.html">学情分析</a></li>
+      </ul>
+      <div class="nav-user">
+        <span>李老师</span>
+        <div class="avatar">李</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size: 26px; margin-bottom: 6px;">🗺 课程知识图谱</h1>
+      <p style="color: var(--text-light); font-size: 14px;">AI 构建的结构化学科知识库，一键检索教学素材、知识点解析与经典例题</p>
+    </div>
+
+    <!-- 统计 -->
+    <div class="stats-grid" style="margin-bottom: 28px;">
+      <div class="card stat-card">
+        <div class="stat-icon icon-blue">📂</div>
+        <div><div class="stat-value">9 学科</div><div class="stat-label">覆盖全学段学科</div></div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon icon-green">🧩</div>
+        <div><div class="stat-value">1,284</div><div class="stat-label">知识点节点</div></div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon icon-orange">📎</div>
+        <div><div class="stat-value">5,672</div><div class="stat-label">关联教学资源</div></div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon icon-purple">📐</div>
+        <div><div class="stat-value">18,320</div><div class="stat-label">经典例题与解析</div></div>
+      </div>
+    </div>
+
+    <div class="knowledge-layout">
+      <!-- 侧边栏 -->
+      <aside class="sidebar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search" placeholder="搜索知识点、例题...">
+        </div>
+
+        <div style="font-size: 13px; color: var(--text-light); margin-bottom: 8px; padding: 0 4px;">📚 学科分类</div>
+        <ul class="subject-list" id="subject-list">
+          <li class="active" data-subject="all">📚 全部 <span class="subject-count">1284</span></li>
+          <li data-subject="math">🔢 高等数学 <span class="subject-count">286</span></li>
+          <li data-subject="chinese">📖 程序设计 <span class="subject-count">235</span></li>
+          <li data-subject="english">🔤 大学英语 <span class="subject-count">210</span></li>
+          <li data-subject="physics">⚛️ 线性代数 <span class="subject-count">168</span></li>
+          <li data-subject="chemistry">🧪 概率论 <span class="subject-count">142</span></li>
+          <li data-subject="biology">🧬 数据结构 <span class="subject-count">98</span></li>
+          <li data-subject="history">🏛 计算机网络 <span class="subject-count">76</span></li>
+          <li data-subject="geography">🌏 思想政治 <span class="subject-count">69</span></li>
+        </ul>
+
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+          <div style="font-size: 13px; color: var(--text-light); margin-bottom: 8px;">📌 年级筛选</div>
+          <div class="tag-group" style="flex-direction: column; gap: 6px;" data-multi="false" id="grade-tags">
+            <div class="tag active" style="justify-content: flex-start;">🟢 大一</div>
+            <div class="tag" style="justify-content: flex-start;">🔵 大二</div>
+            <div class="tag" style="justify-content: flex-start;">🟠 大三</div>
+            <div class="tag" style="justify-content: flex-start;">🔴 大四</div>
+          </div>
+        </div>
+
+        <button class="btn-primary-solid" style="width: 100%; margin-top: 18px; padding: 10px;" onclick="showToast('已上传教学资源并加入知识图谱索引')">
+          ⬆ 上传教学资料
+        </button>
+      </aside>
+
+      <!-- 内容区 -->
+      <section>
+        <!-- 知识点图谱可视化卡片 -->
+        <div class="card" style="margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="font-size: 17px;">🧠 二次函数 · 知识图谱概览</h3>
+            <div style="display:flex; gap: 8px;">
+              <button class="btn-secondary" style="padding: 6px 14px; font-size: 12px;" onclick="showToast('已导出知识点关系图')">导出图谱</button>
+              <button class="btn-primary-solid" style="padding: 6px 14px; font-size: 12px;">一键引用到教案</button>
+            </div>
+          </div>
+
+          <!-- 模拟知识图谱可视化 -->
+          <div style="position: relative; height: 280px; background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%); border-radius: 12px; overflow: hidden;">
+            <!-- 中心节点 -->
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 110px; height: 110px; border-radius: 50%; background: var(--gradient); color: #fff; display: grid; place-items: center; font-weight: 700; box-shadow: 0 10px 30px rgba(79,70,229,.35); z-index: 3;">二次函数</div>
+
+            <!-- 连接线 SVG -->
+            <svg style="position:absolute; inset:0; width:100%; height:100%; z-index:1;">
+              <line x1="50%" y1="50%" x2="20%" y2="20%" stroke="#c7d2fe" stroke-width="2"/>
+              <line x1="50%" y1="50%" x2="80%" y2="20%" stroke="#c7d2fe" stroke-width="2"/>
+              <line x1="50%" y1="50%" x2="15%" y2="70%" stroke="#c7d2fe" stroke-width="2"/>
+              <line x1="50%" y1="50%" x2="85%" y2="70%" stroke="#c7d2fe" stroke-width="2"/>
+              <line x1="50%" y1="50%" x2="50%" y2="12%" stroke="#c7d2fe" stroke-width="2"/>
+              <line x1="50%" y1="50%" x2="50%" y2="88%" stroke="#c7d2fe" stroke-width="2"/>
+            </svg>
+
+            <!-- 子节点 -->
+            <div style="position: absolute; left: 20%; top: 20%; transform: translate(-50%, -50%); padding: 10px 14px; background: #fff; border-radius: 10px; box-shadow: var(--shadow); font-size: 13px; border: 2px solid #4f46e5; z-index: 2;">📐 定义与概念</div>
+            <div style="position: absolute; left: 80%; top: 20%; transform: translate(-50%, -50%); padding: 10px 14px; background: #fff; border-radius: 10px; box-shadow: var(--shadow); font-size: 13px; border: 2px solid #8b5cf6; z-index: 2;">🎨 图像与性质</div>
+            <div style="position: absolute; left: 15%; top: 70%; transform: translate(-50%, -50%); padding: 10px 14px; background: #fff; border-radius: 10px; box-shadow: var(--shadow); font-size: 13px; border: 2px solid #10b981; z-index: 2;">📏 三种表达式</div>
+            <div style="position: absolute; left: 85%; top: 70%; transform: translate(-50%, -50%); padding: 10px 14px; background: #fff; border-radius: 10px; box-shadow: var(--shadow); font-size: 13px; border: 2px solid #f59e0b; z-index: 2;">🧩 应用与建模</div>
+            <div style="position: absolute; left: 50%; top: 12%; transform: translate(-50%, -50%); padding: 10px 14px; background: #fff; border-radius: 10px; box-shadow: var(--shadow); font-size: 13px; border: 2px solid #ec4899; z-index: 2;">📍 顶点与对称轴</div>
+            <div style="position: absolute; left: 50%; top: 88%; transform: translate(-50%, -50%); padding: 10px 14px; background: #fff; border-radius: 10px; box-shadow: var(--shadow); font-size: 13px; border: 2px solid #06b6d4; z-index: 2;">🔗 与一元二次方程</div>
+
+            <!-- 二级节点 -->
+            <div style="position: absolute; left: 8%; top: 45%; padding: 6px 10px; background: #ecfdf5; color: #065f46; border-radius: 6px; font-size: 11px; z-index: 2;">一般式 y=ax²+bx+c</div>
+            <div style="position: absolute; left: 88%; top: 45%; padding: 6px 10px; background: #fffbeb; color: #92400e; border-radius: 6px; font-size: 11px; z-index: 2;">最值问题</div>
+            <div style="position: absolute; left: 32%; top: 6%; padding: 6px 10px; background: #f3e8ff; color: #6d28d9; border-radius: 6px; font-size: 11px; z-index: 2;">开口方向</div>
+            <div style="position: absolute; left: 62%; top: 94%; padding: 6px 10px; background: #ecfeff; color: #155e75; border-radius: 6px; font-size: 11px; z-index: 2;">交点/判别式</div>
+          </div>
+
+          <!-- 图谱统计 -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 16px;">
+            <div style="text-align: center; padding: 10px; background: #f8fafc; border-radius: 8px;">
+              <div style="font-size: 20px; font-weight: 700; color: var(--primary);">6</div>
+              <div style="font-size: 12px; color: var(--text-light);">核心知识点</div>
+            </div>
+            <div style="text-align: center; padding: 10px; background: #f8fafc; border-radius: 8px;">
+              <div style="font-size: 20px; font-weight: 700; color: var(--secondary);">42</div>
+              <div style="font-size: 12px; color: var(--text-light);">典型例题</div>
+            </div>
+            <div style="text-align: center; padding: 10px; background: #f8fafc; border-radius: 8px;">
+              <div style="font-size: 20px; font-weight: 700; color: var(--accent);">18</div>
+              <div style="font-size: 12px; color: var(--text-light);">前置关联知识</div>
+            </div>
+            <div style="text-align: center; padding: 10px; background: #f8fafc; border-radius: 8px;">
+              <div style="font-size: 20px; font-weight: 700; color: #8b5cf6;">9</div>
+              <div style="font-size: 12px; color: var(--text-light);">后续延伸内容</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 知识点卡片 -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 style="font-size: 17px;">📚 知识点资源卡片</h3>
+          <div style="font-size: 13px; color: var(--text-light);">共 <strong id="card-count">12</strong> 条相关资源</div>
+        </div>
+
+        <div class="knowledge-cards" id="k-cards">
+          <div class="k-card" data-subject="math">
+            <div class="k-card-header">
+              <span class="k-card-tag tag-math">高等数学</span>
+              <span style="font-size:12px;">⭐⭐⭐⭐⭐</span>
+            </div>
+            <h4>二次函数三种表达式互化</h4>
+            <p>系统讲解一般式、顶点式、交点式三种表达式的相互转化方法与适用场景，附12道典型例题。</p>
+            <div class="k-card-footer"><span>👁 1.2k 阅读</span><span style="color:var(--primary)">查看详情 →</span></div>
+          </div>
+
+          <div class="k-card" data-subject="math">
+            <div class="k-card-header">
+              <span class="k-card-tag tag-math">高等数学</span>
+              <span style="font-size:12px;">⭐⭐⭐⭐</span>
+            </div>
+            <h4>二次函数图像平移规律（左加右减）</h4>
+            <p>通过动态演示与口诀记忆法，帮助学生快速掌握二次函数图像的平移、翻折与对称变换。</p>
+            <div class="k-card-footer"><span>👁 986 阅读</span><span style="color:var(--primary)">查看详情 →</span></div>
+          </div>
+
+          <div class="k-card" data-subject="chinese">
+            <div class="k-card-header">
+              <span class="k-card-tag tag-chinese">程序设计</span>
+              <span style="font-size:12px;">⭐⭐⭐⭐⭐</span>
+            </div>
+            <h4>记叙文阅读 · 人物描写技法</h4>
+            <p>归纳外貌、动作、语言、心理、神态五大描写手法的答题公式与经典课文案例分析。</p>
+            <div class="k-card-footer"><span>👁 1.5k 阅读</span><span style="color:var(--primary)">查看详情 →</span></div>
+          </div>
+
+          <div class="k-card" data-subject="english">
+            <div class="k-card-header">
+              <span class="k-card-tag tag-english">大学英语</span>
+              <span style="font-size:12px;">⭐⭐⭐⭐</span>
+            </div>
+            <h4>现在完成时 vs 一般过去时</h4>
+            <p>通过时间轴对比、典型句例、易错陷阱三个维度清晰区分两大时态的使用边界。</p>
+            <div class="k-card-footer"><span>👁 872 阅读</span><span style="color:var(--primary)">查看详情 →</span></div>
+          </div>
+
+          <div class="k-card" data-subject="physics">
+            <div class="k-card-header">
+              <span class="k-card-tag tag-physics">线性代数</span>
+              <span style="font-size:12px;">⭐⭐⭐⭐⭐</span>
+            </div>
+            <h4>浮力阿基米德原理专题</h4>
+            <p>包含公式推导、受力分析、浮沉条件与四大经典题型（漂浮、悬浮、下沉、液面变化）。</p>
+            <div class="k-card-footer"><span>👁 1.1k 阅读</span><span style="color:var(--primary)">查看详情 →</span></div>
+          </div>
+
+          <div class="k-card" data-subject="chemistry">
+            <div class="k-card-header">
+              <span class="k-card-tag tag-chemistry">概率论</span>
+              <span style="font-size:12px;">⭐⭐⭐⭐</span>
+            </div>
+            <h4>酸碱盐反应规律速记</h4>
+            <p>整理酸碱盐之间复分解反应的发生条件、常见沉淀口诀与离子配对关系图谱。</p>
+            <div class="k-card-footer"><span>👁 758 阅读</span><span style="color:var(--primary)">查看详情 →</span></div>
+          </div>
+
+          <div class="k-card" data-subject="math">
+            <div class="k-card-header">
+              <span class="k-card-tag tag-math">高等数学</span>
+              <span style="font-size:12px;">⭐⭐⭐⭐</span>
+            </div>
+            <h4>二次函数应用题（利润最值）</h4>
+            <p>梳理销售利润、面积最值两大应用题解题模型，配10道近三年中考真题解析。</p>
+            <div class="k-card-footer"><span>👁 1.0k 阅读</span><span style="color:var(--primary)">查看详情 →</span></div>
+          </div>
+
+          <div class="k-card" data-subject="chinese">
+            <div class="k-card-header">
+              <span class="k-card-tag tag-chinese">程序设计</span>
+              <span style="font-size:12px;">⭐⭐⭐⭐</span>
+            </div>
+            <h4>文言文 · 常见虚词用法</h4>
+            <p>整理"之、其、而、于、以、为"等18个高频虚词全部用法与例句对照。</p>
+            <div class="k-card-footer"><span>👁 1.3k 阅读</span><span style="color:var(--primary)">查看详情 →</span></div>
+          </div>
+
+          <div class="k-card" data-subject="physics">
+            <div class="k-card-header">
+              <span class="k-card-tag tag-physics">线性代数</span>
+              <span style="font-size:12px;">⭐⭐⭐⭐⭐</span>
+            </div>
+            <h4>欧姆定律 · 电路动态分析</h4>
+            <p>串并联电路中滑动变阻器、开关通断导致的电流表电压表示数变化速判方法。</p>
+            <div class="k-card-footer"><span>👁 1.4k 阅读</span><span style="color:var(--primary)">查看详情 →</span></div>
+          </div>
+
+          <div class="k-card" data-subject="english">
+            <div class="k-card-header">
+              <span class="k-card-tag tag-english">大学英语</span>
+              <span style="font-size:12px;">⭐⭐⭐⭐</span>
+            </div>
+            <h4>中考书面表达万能模板</h4>
+            <p>涵盖书信、议论文、记叙文、图表说明四大体裁，附高分过渡词与背诵范文。</p>
+            <div class="k-card-footer"><span>👁 2.1k 阅读</span><span style="color:var(--primary)">查看详情 →</span></div>
+          </div>
+
+          <div class="k-card" data-subject="chemistry">
+            <div class="k-card-header">
+              <span class="k-card-tag tag-chemistry">概率论</span>
+              <span style="font-size:12px;">⭐⭐⭐⭐</span>
+            </div>
+            <h4>金属活动性顺序表应用</h4>
+            <p>图像题、滤渣滤液分析、实验探究题三类题型解题技巧突破。</p>
+            <div class="k-card-footer"><span>👁 836 阅读</span><span style="color:var(--primary)">查看详情 →</span></div>
+          </div>
+
+          <div class="k-card" data-subject="math">
+            <div class="k-card-header">
+              <span class="k-card-tag tag-math">高等数学</span>
+              <span style="font-size:12px;">⭐⭐⭐⭐⭐</span>
+            </div>
+            <h4>函数与几何综合压轴题</h4>
+            <p>精讲二次函数与三角形、四边形、圆结合的存在性问题与动点问题解题策略。</p>
+            <div class="k-card-footer"><span>👁 1.6k 阅读</span><span style="color:var(--primary)">查看详情 →</span></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="footer">
+      EduWise · 智教助手 &nbsp;|&nbsp; 知识图谱持续 AI 自动更新与扩展
+    </div>
+  </div>
+
+  <script src="assets/js/common.js?v=2"></script>
+  <script>
+    // 学科筛选
+    document.querySelectorAll('#subject-list li').forEach(li => {
+      li.addEventListener('click', () => {
+        document.querySelectorAll('#subject-list li').forEach(x => x.classList.remove('active'));
+        li.classList.add('active');
+        filterCards();
+      });
+    });
+
+    // 搜索
+    document.getElementById('search').addEventListener('input', filterCards);
+
+    function filterCards() {
+      const sub = document.querySelector('#subject-list li.active')?.dataset.subject || 'all';
+      const kw = document.getElementById('search').value.trim().toLowerCase();
+      const cards = document.querySelectorAll('#k-cards .k-card');
+      let count = 0;
+      cards.forEach(card => {
+        const s = card.dataset.subject;
+        const txt = card.textContent.toLowerCase();
+        const matchSub = (sub === 'all') || (s === sub);
+        const matchKw = !kw || txt.includes(kw);
+        card.style.display = (matchSub && matchKw) ? '' : 'none';
+        if (matchSub && matchKw) count++;
+      });
+      document.getElementById('card-count').textContent = count;
+    }
+  </script>
+</body>
+</html>

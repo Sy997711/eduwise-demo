@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智能备课 | EduWise · 智教助手</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=2">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-icon">🎓</div>
+        <span>EduWise 智教助手</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="lesson-prep.html" class="active">智能备课</a></li>
+        <li><a href="lesson-plan.html">教案生成</a></li>
+        <li><a href="knowledge.html">知识图谱</a></li>
+        <li><a href="analysis.html">学情分析</a></li>
+      </ul>
+      <div class="nav-user">
+        <span>李老师</span>
+        <div class="avatar">李</div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- 标题区 -->
+    <div style="margin-bottom: 28px;">
+      <h1 style="font-size: 26px; margin-bottom: 6px;">📝 智能备课</h1>
+      <p style="color: var(--text-light); font-size: 14px;">填写基本信息，AI 将在 30 秒内为您生成一份完整、专业的备课方案</p>
+    </div>
+
+    <!-- 步骤指示器 -->
+    <div class="steps">
+      <div class="step done"><div class="step-num">✓</div><div class="step-text">基础信息</div></div>
+      <div class="step-line"></div>
+      <div class="step active"><div class="step-num">2</div><div class="step-text">AI 智能生成</div></div>
+      <div class="step-line"></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text">查看与导出</div></div>
+    </div>
+
+    <div class="two-col">
+      <!-- 左侧：配置表单 -->
+      <div class="card" style="height: fit-content;">
+        <h3 style="font-size: 17px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">📌 备课信息配置</h3>
+
+        <div class="ai-tip">
+          <div class="ai-tip-icon">🤖</div>
+          <div>EduWise 将基于课程标准、教育学理论和学科知识图谱为您智能生成备课方案</div>
+        </div>
+
+        <!-- 学科 -->
+        <div class="form-group">
+          <label class="form-label">📘 授课学科</label>
+          <div class="tag-group" data-multi="false" id="subject-tags">
+            <div class="tag active">高等数学</div>
+            <div class="tag">程序设计</div>
+            <div class="tag">大学英语</div>
+            <div class="tag">线性代数</div>
+            <div class="tag">概率论</div>
+            <div class="tag">数据结构</div>
+            <div class="tag">计算机网络</div>
+            <div class="tag">思想政治</div>
+          </div>
+        </div>
+
+        <!-- 年级 -->
+        <div class="form-group">
+          <label class="form-label">🎒 授课年级</label>
+          <select class="form-select" id="grade">
+            <option selected>大学一年级（大一）</option>
+            <option>大学二年级（大二）</option>
+            <option>大学三年级（大三）</option>
+            <option>大学四年级（大四）</option>
+          </select>
+        </div>
+
+        <!-- 课题 -->
+        <div class="form-group">
+          <label class="form-label">📖 授课课题</label>
+          <input class="form-input" id="topic" type="text" placeholder="例如：一元二次方程的解法" value="一元二次方程的解法">
+        </div>
+
+        <!-- 课时与难度 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">⏱ 课时时长（分钟）</label>
+            <input class="form-input" id="duration" type="number" value="45" min="20" max="120">
+          </div>
+          <div class="form-group">
+            <label class="form-label">📊 难度等级</label>
+            <div class="tag-group" data-multi="false" id="diff-tags">
+              <div class="tag">简单</div>
+              <div class="tag active">中等</div>
+              <div class="tag">较难</div>
+              <div class="tag">困难</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 教学目标 -->
+        <div class="form-group">
+          <label class="form-label">🎯 个性化教学目标（可选，每行一条，留空则 AI 自动生成）</label>
+          <textarea class="form-textarea" id="objectives" rows="4" placeholder="例如：&#10;1. 理解配方法的基本原理&#10;2. 能运用公式法求解一元二次方程&#10;3. 培养数学建模和问题分析能力"></textarea>
+        </div>
+
+        <!-- 生成按钮 -->
+        <div style="display:flex; gap:10px; margin-top: 8px;">
+          <button class="btn-primary-solid" style="flex:1;" onclick="doGenerate()">
+            ✨ AI 生成备课方案
+          </button>
+          <button class="btn-secondary" onclick="resetForm()">重置</button>
+        </div>
+      </div>
+
+      <!-- 右侧：输出区 -->
+      <div class="output-panel">
+        <div class="output-header">
+          <h4>📄 备课方案预览</h4>
+          <div class="output-actions">
+            <button class="icon-btn" title="复制内容" onclick="copyResult('#output')">📋</button>
+            <button class="icon-btn" title="下载 Markdown" onclick="downloadResult('#output', '备课方案-' + (document.getElementById('topic').value||'output'))">⬇</button>
+            <button class="icon-btn" title="重新生成" onclick="doGenerate()">🔄</button>
+          </div>
+        </div>
+        <div class="output-body" id="output">
+          <!-- 加载动画 -->
+          <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div style="font-size: 14px; color: var(--text-light);">AI 正在分析教学需求并生成备课方案，请稍候...</div>
+          </div>
+
+          <!-- 空状态 -->
+          <div class="empty-state" id="empty-state">
+            <div class="empty-icon">📝</div>
+            <div style="font-size: 15px; font-weight: 500; color: var(--text);">填写左侧信息后点击「AI 生成备课方案」</div>
+            <div style="font-size: 13px;">AI 将为您生成包含教学目标、重难点、过程设计、板书、反思等内容的完整备课稿</div>
+          </div>
+
+          <!-- 结果内容 -->
+          <div class="output-body-inner"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      EduWise · 智教助手 &nbsp;|&nbsp; 聚焦教师减负 · 赋能教学创新
+    </div>
+  </div>
+
+  <script src="assets/js/common.js?v=2"></script>
+  <script>
+    function doGenerate() {
+      const subject = document.querySelector('#subject-tags .tag.active')?.textContent || '高等数学';
+      const grade = document.getElementById('grade').value;
+      const topic = document.getElementById('topic').value.trim();
+      const duration = parseInt(document.getElementById('duration').value) || 45;
+      const difficulty = document.querySelector('#diff-tags .tag.active')?.textContent || '中等';
+      const objectivesRaw = document.getElementById('objectives').value.trim();
+
+      if (!topic) {
+        showToast('请填写授课课题');
+        document.getElementById('topic').focus();
+        return;
+      }
+
+      // 切分目标
+      let objectives = [];
+      if (objectivesRaw) {
+        objectives = objectivesRaw.split(/\r?\n/).map(l => l.replace(/^[\s\d\.\-、）\)]+/, '').trim()).filter(Boolean);
+      }
+
+      showLoading('#output');
+
+      // 模拟 AI 生成延迟
+      setTimeout(() => {
+        const html = generateLessonPrep({ subject, grade, topic, duration, difficulty, objectives });
+        renderResult('#output', html);
+        // 标记步骤完成
+        document.querySelectorAll('.step').forEach((s, i) => {
+          s.classList.remove('active', 'done');
+          if (i <= 3) s.classList.add('done');
+        });
+      }, 1600);
+    }
+
+    function resetForm() {
+      document.getElementById('topic').value = '一元二次方程的解法';
+      document.getElementById('duration').value = 45;
+      document.getElementById('objectives').value = '';
+      document.querySelector('#output .output-body-inner').innerHTML = '';
+      document.getElementById('empty-state').style.display = 'flex';
+      document.querySelectorAll('.step').forEach((s, i) => {
+        s.classList.remove('done');
+        if (i === 0 || i === 1) {
+          if (i === 0) s.classList.add('done');
+          if (i === 1) s.classList.add('active');
+        }
+      });
+    }
+
+    // 页面加载后：自动加载一次示例
+    window.addEventListener('load', () => {
+      // 不自动生成，保留空状态
+    });
+  </script>
+</body>
+</html>
